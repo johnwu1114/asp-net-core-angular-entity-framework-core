@@ -1,1 +1,39 @@
-﻿<h1>Hello {{name}}</h1>
+﻿<h1>{{title}}</h1>
+
+<div>
+    <label>Find by Id</label>
+    <input type="text" name="contactId" [(ngModel)]="contactId" />
+    <input type="button" (click)="find()" value="Find" />
+</div>
+<br />
+<div>{{message}}</div>
+<br />
+<form>
+    <input type="hidden" name="Id" [(ngModel)]="model.Id" />
+    <div>
+        <label>First Name</label>
+        <div><input type="text" name="FirstName" [(ngModel)]="model.FirstName" /></div>
+    </div>
+    <div>
+        <label>Last Name</label>
+        <div><input type="text" name="LastName" [(ngModel)]="model.LastName" /></div>
+    </div>
+    <div>
+        <label>Phone Number</label>
+        <div><input type="text" name="PhoneNumber" [(ngModel)]="model.PhoneNumber" /></div>
+    </div>
+    <div>
+        <label>Email</label>
+        <div><input type="text" name="Email" [(ngModel)]="model.Email" /></div>
+    </div>
+    <div>
+        <label>Address</label>
+        <div><input type="text" name="Address" [(ngModel)]="model.Address" /></div>
+    </div>
+    <div>
+        <input *ngIf="!model.Id" type="button" (click)="add()" value="Add" />
+        <input *ngIf="model.Id" type="button" (click)="save()" value="Save" />
+        <input *ngIf="model.Id" type="button" (click)="delete()" value="Delete" />
+        <input type="button" (click)="clear()" value="Clear" />
+    </div>
+</form>

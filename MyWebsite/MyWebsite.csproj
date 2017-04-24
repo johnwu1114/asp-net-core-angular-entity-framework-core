@@ -17,6 +17,8 @@
     <Content Include="wwwroot\app\bundle-vendors.ts" />
     <Content Include="wwwroot\app\bundle.ts" />
     <Content Include="wwwroot\app\main.ts" />
+    <Content Include="wwwroot\app\models\ContactModel.ts" />
+    <Content Include="wwwroot\app\models\ResultModel.ts" />
     <Content Include="wwwroot\favicon.ico" />
     <Content Include="wwwroot\index.html" />
   </ItemGroup>
@@ -24,6 +26,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
   </ItemGroup>
 </Project>
