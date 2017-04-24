@@ -1,0 +1,24 @@
+﻿<style>
+    li.menuItem {
+        float: left;
+        margin-left:5px;
+    }
+    div.menuClear {
+        clear: left;
+    }
+</style>
+<template ngFor let-item [ngForOf]="menu">
+    <li *ngIf="item.menuName" class="menuItem">
+        <a [routerLink]="['/',item.path]">
+            {{item.menuName}}
+        </a>
+        <ul *ngIf="item.children">
+            <template ngFor let-sub [ngForOf]="item.children">
+                <li *ngIf="sub.menuName">
+                    <a [routerLink]="sub.path?['/',item.path,sub.path]:['/',item.path]">{{sub.menuName}}</a>
+                </li>
+            </template>
+        </ul>
+    </li>
+</template>
+<div class="menuClear"></div>
