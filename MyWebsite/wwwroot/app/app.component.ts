@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Http } from "@angular/http";
-import { ResultModel } from "./models/ResultModel"
-import { ContactModel } from "./models/ContactModel"
+import { ResultModel } from "./shared/models/result.model";
+import { ContactModel } from "./shared/models/contact.model";
 
 @Component({
     selector: "my-app",
@@ -9,7 +9,7 @@ import { ContactModel } from "./models/ContactModel"
 })
 export class AppComponent {
     private api: string = "/api/contacts";
-    title = "Contact Card";
+    title = "Contacts";
     model: ContactModel;
     contactId: number;
     message: string;

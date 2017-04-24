@@ -17,8 +17,8 @@
     <Content Include="wwwroot\app\bundle-vendors.ts" />
     <Content Include="wwwroot\app\bundle.ts" />
     <Content Include="wwwroot\app\main.ts" />
-    <Content Include="wwwroot\app\models\ContactModel.ts" />
-    <Content Include="wwwroot\app\models\ResultModel.ts" />
+    <Content Include="wwwroot\app\shared\models\contact.model.ts" />
+    <Content Include="wwwroot\app\shared\models\result.model.ts" />
     <Content Include="wwwroot\favicon.ico" />
     <Content Include="wwwroot\index.html" />
   </ItemGroup>
