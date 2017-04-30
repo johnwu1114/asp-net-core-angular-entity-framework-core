@@ -6,5 +6,4 @@ import { Http } from "@angular/http";
     template: require("./app.component.html")
 })
 export class AppComponent {
-    title = "Contacts";
 }

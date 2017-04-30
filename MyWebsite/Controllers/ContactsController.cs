@@ -10,6 +10,15 @@ namespace MyWebsite.Controllers
     {
         private static List<ContactModel> _contacts = new List<ContactModel>();
 
+        [HttpGet]
+        public ResultModel Get()
+        {
+            var result = new ResultModel();
+            result.Data = _contacts;
+            result.IsSuccess = result.Data != null;
+            return result;
+        }
+
         [HttpGet("{id}")]
         public ResultModel Get(int id)
         {
@@ -30,13 +39,14 @@ namespace MyWebsite.Controllers
             return result;
         }
 
-        [HttpPut]
-        public ResultModel Put([FromBody]ContactModel contact)
+        [HttpPut("{id}")]
+        public ResultModel Put(int id, [FromBody]ContactModel contact)
         {
             var result = new ResultModel();
             int index;
-            if ((index = _contacts.FindIndex(c => c.Id == contact.Id)) != -1)
+            if ((index = _contacts.FindIndex(c => c.Id == id)) != -1)
             {
+                contact.Id = id;
                 _contacts[index] = contact;
                 result.IsSuccess = true;
             }
