@@ -72,7 +72,7 @@ export class ContactsComponent {
 
     save(): void {
         this.clearMessage();
-        this.http.put(`${this.api}/${this.contactId}`, this.model).subscribe(
+        this.http.put(`${this.api}`, this.model).subscribe(
             (response) => {
                 let result: ResultModel = response.json();
                 if (!result.IsSuccess) {

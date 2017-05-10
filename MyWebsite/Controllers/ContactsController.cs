@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyWebsite.DAL;
 using MyWebsite.Models;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace MyWebsite.Controllers
@@ -8,13 +8,18 @@ namespace MyWebsite.Controllers
     [Route("api/[controller]")]
     public class ContactsController : Controller
     {
-        private static List<ContactModel> _contacts = new List<ContactModel>();
+        private readonly MyContext _context;
+
+        public ContactsController(MyContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet]
         public ResultModel Get()
         {
             var result = new ResultModel();
-            result.Data = _contacts;
+            result.Data = _context.Contacts;
             result.IsSuccess = result.Data != null;
             return result;
         }
@@ -23,7 +28,7 @@ namespace MyWebsite.Controllers
         public ResultModel Get(int id)
         {
             var result = new ResultModel();
-            result.Data = _contacts.SingleOrDefault(c => c.Id == id);
+            result.Data = _context.Contacts.SingleOrDefault(c => c.Id == id);
             result.IsSuccess = result.Data != null;
             return result;
         }
@@ -32,22 +37,22 @@ namespace MyWebsite.Controllers
         public ResultModel Post([FromBody]ContactModel contact)
         {
             var result = new ResultModel();
-            contact.Id = _contacts.Count() == 0 ? 1 : _contacts.Max(c => c.Id) + 1;
-            _contacts.Add(contact);
+            _context.Contacts.Add(contact);
+            _context.SaveChanges();
             result.Data = contact.Id;
             result.IsSuccess = true;
             return result;
         }
 
-        [HttpPut("{id}")]
-        public ResultModel Put(int id, [FromBody]ContactModel contact)
+        [HttpPut]
+        public ResultModel Put([FromBody]ContactModel contact)
         {
             var result = new ResultModel();
-            int index;
-            if ((index = _contacts.FindIndex(c => c.Id == id)) != -1)
+            var oriContact = _context.Contacts.SingleOrDefault(c => c.Id == contact.Id);
+            if (oriContact != null)
             {
-                contact.Id = id;
-                _contacts[index] = contact;
+                _context.Entry(oriContact).CurrentValues.SetValues(contact);
+                _context.SaveChanges();
                 result.IsSuccess = true;
             }
             return result;
@@ -57,10 +62,11 @@ namespace MyWebsite.Controllers
         public ResultModel Delete(int id)
         {
             var result = new ResultModel();
-            int index;
-            if ((index = _contacts.FindIndex(c => c.Id == id)) != -1)
+            var oriContact = _context.Contacts.SingleOrDefault(c => c.Id == id);
+            if (oriContact != null)
             {
-                _contacts.RemoveAt(index);
+                _context.Contacts.Remove(oriContact);
+                _context.SaveChanges();
                 result.IsSuccess = true;
             }
             return result;
